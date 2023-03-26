@@ -71,17 +71,11 @@
 			#disp .step, #answer .step {
 				margin-right: 0.5rem;
 			}
+			#disp, #answer[lang=en] {
+				font-size: 400%;
+			}
 			#disp[lang=en], #answer[lang=en] {
 				font-size: 300%;
-			}
-			#disp[lang=ar], #answer[lang=ar] {
-				font-size: 400%;
-			}
-			#disp[lang=fa], #answer[lang=fa] {
-				font-size: 400%;
-			}
-			#disp[lang=ur], #answer[lang=ur] {
-				font-size: 400%;
 			}
 			#answer {
 				margin-bottom: 1rem;
@@ -115,23 +109,23 @@
 				padding: 0.5rem;
 				font-size: 150%;
 			}
-			table[lang=en] button {
-				font-size: 200%;
+			table button {
+				font-size: 250%;
 			}
-			table[lang=ar] button {
-				font-size: 300%;
+			table[lang=en] button {
+				font-size: 250%;
 			}
 			table[lang=fa] button {
-				font-size: 300%;
+				font-size: 250%;
 			}
-			table[lang=ur] button {
-				font-size: 300%;
+			table[lang=bn] button {
+				font-size: 250%;
 			}
 			#flip {
 				margin-top: 1em;
 			}
 			p {
-				font-size: 50%;
+				font-size: 80%;
 			}
 		</style>
 		<script src="numberer.js" async="" defer="" crossorigin="anonymous"></script>
@@ -140,6 +134,7 @@
 		<h1>Learn Numbers</h1>
 		From: <select id="source" onchange="setLanguage()">
 			<option value="ar">Arabic</option>
+			<option value="bn">Bengali</option>
 			<option value="fa">Farsi</option>
 			<option value="ur">Urdu</option>
 			<option value="en">English</option>
@@ -147,14 +142,15 @@
 		To: <select id="target" onchange="setLanguage()">
 			<option value="en">English</option>
 			<option value="ar">Arabic</option>
+			<option value="bn">Bengali</option>
 			<option value="fa">Farsi</option>
 			<option value="ur">Urdu</option>
 		</select>
 		<br/>
-		<button id="flip" onclick="flip()">Switch</button>
+		<button id="flip" onclick="flip()">Switch 🔄</button>
 		<div id="disp"></div>
 		<div id="answer"></div>
-		<table>
+		<table id="numpad">
 			<tbody>
 				<tr>
 					<td>
@@ -202,7 +198,7 @@
 			Click or type to enter numbers.
 		</p>
 		<script>
-			const possible = ['ar', 'fa', 'ur', 'en'];
+			const possible = ['ar', 'fa', 'ur', 'en', 'bn'];
 			let source = 'ar';
 			let target = 'en';
 			let current = [0];
@@ -255,9 +251,12 @@
 				if (lang === 'en') {
 					return digits;
 				} else if (lang === 'ar') {
-					return digitsToArabic(digits)
+					return digitsToArabic(digits);
+				} else if (lang === 'bn') {
+					return digitsToBengali(digits);
 				}
 
+				// fa, ur
 				return digitsToFarsi(digits);
 			}
 
@@ -293,6 +292,7 @@
 			}
 
 			function fillButtons() {
+				document.getElementById('numpad').lang = target;
 				for (let i = 0; i < 10; i++) {
 					const n = getDigitsInLanguage(target, [i])[0];
 					document.getElementById(`b${i}`).textContent = n;

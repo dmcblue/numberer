@@ -33,3 +33,9 @@ function digitsToFarsi(digits) {
 		return String.fromCodePoint(1776 + digit);
 	});
 }
+
+function digitsToBengali(digits) {
+	return digits.map(function(digit) {
+		return String.fromCodePoint(2534 + digit);
+	});
+}
