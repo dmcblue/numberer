@@ -8,10 +8,6 @@ Tools.getDigit = function () {
 	return Math.floor(Math.random() * 10);
 };
 
-Tools.getRandomInteger = function (min, max) {
-	return Math.floor(Math.random() * (max - min)) + min;
-};
-
 Tools.getDigits = function getDigits(n) {
 	let digits = [];
 	for (let i = 0; i < n; i++) {
@@ -50,7 +46,11 @@ Tools.getDigitsInLanguage = function (lang, digits) {
 
 	// fa, ur
 	return Tools.digitsToFarsi(digits);
-}
+};
+
+Tools.getRandomInteger = function (min, max) {
+	return Math.floor(Math.random() * (max - min)) + min;
+};
 
 Object.freeze(Tools);
 
@@ -63,32 +63,18 @@ UI.state = {
 	testIndex: 0
 };
 
-UI.setLanguage = function () {
-	UI.state.source = document.getElementById('source').value;
-	UI.state.target = document.getElementById('target').value;
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	urlParams.set('source', UI.state.source);
-	urlParams.set('target', UI.state.target);
-	var newRelativePathQuery = window.location.pathname + '?' + urlParams.toString();
-	history.pushState(null, '', newRelativePathQuery);
-	UI.fillButtons();
-	UI.next();
+UI.fillButtons = function () {
+	document.getElementById('numpad').lang = UI.state.target;
+	for (let i = 0; i < 10; i++) {
+		const n = Tools.getDigitsInLanguage(UI.state.target, [i])[0];
+		document.getElementById(`b${i}`).textContent = n;
+	}
 };
 
 UI.flip = function () {
 	document.getElementById('source').value = UI.state.target;
 	document.getElementById('target').value = UI.state.source;
 	UI.setLanguage();
-};
-
-UI.onKeyUp = function (event) {
-	const keyCode = parseInt(event.keyCode);
-	if (keyCode > 47 && keyCode < 58) {
-		UI.test(keyCode - 48);
-	} else if (keyCode > 95 && keyCode < 106) {
-		UI.test(keyCode - 96);
-	}
 };
 
 UI.next = function () {
@@ -122,28 +108,26 @@ UI.next = function () {
 	}
 };
 
-UI.fillButtons = function () {
-	document.getElementById('numpad').lang = UI.state.target;
-	for (let i = 0; i < 10; i++) {
-		const n = Tools.getDigitsInLanguage(UI.state.target, [i])[0];
-		document.getElementById(`b${i}`).textContent = n;
+UI.onKeyUp = function (event) {
+	const keyCode = parseInt(event.keyCode);
+	if (keyCode > 47 && keyCode < 58) {
+		UI.test(keyCode - 48);
+	} else if (keyCode > 95 && keyCode < 106) {
+		UI.test(keyCode - 96);
 	}
 };
 
-UI.test = function (n) {
-	const step = document.getElementById(`s${UI.state.testIndex}`);
-	step.textContent = Tools.getDigitsInLanguage(UI.state.target, [n])[0];
-	if (n === UI.state.current[UI.state.testIndex]) {
-		step.className = 'step correct';
-		UI.state.testIndex++;
-		if (UI.state.testIndex === UI.state.current.length) {
-			setTimeout(function() {
-				UI.next();
-			}, 500);
-		}
-	} else {
-		step.className = 'step incorrect';
-	}
+UI.setLanguage = function () {
+	UI.state.source = document.getElementById('source').value;
+	UI.state.target = document.getElementById('target').value;
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	urlParams.set('source', UI.state.source);
+	urlParams.set('target', UI.state.target);
+	var newRelativePathQuery = window.location.pathname + '?' + urlParams.toString();
+	history.pushState(null, '', newRelativePathQuery);
+	UI.fillButtons();
+	UI.next();
 };
 
 UI.start = function () {
@@ -160,4 +144,20 @@ UI.start = function () {
 	UI.setLanguage();
 	UI.fillButtons();
 	UI.next();
+};
+
+UI.test = function (n) {
+	const step = document.getElementById(`s${UI.state.testIndex}`);
+	step.textContent = Tools.getDigitsInLanguage(UI.state.target, [n])[0];
+	if (n === UI.state.current[UI.state.testIndex]) {
+		step.className = 'step correct';
+		UI.state.testIndex++;
+		if (UI.state.testIndex === UI.state.current.length) {
+			setTimeout(function() {
+				UI.next();
+			}, 500);
+		}
+	} else {
+		step.className = 'step incorrect';
+	}
 };
