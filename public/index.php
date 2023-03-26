@@ -16,8 +16,8 @@
 				width: device-width;
 			}
 		</style>
-		<link rel="icon" href="<?= $baseUrl ?>/favicon.png">
-		<link rel="canonical" href="<?= $baseUrl ?>/home.html" />
+		<!-- <link rel="icon" href="<?= $baseUrl ?>/favicon.png"> -->
+		<link rel="canonical" href="<?= $baseUrl ?>/index.html" />
 		<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
 
 		<!-- <link href="<?= $baseUrl ?>/style.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@
 			<meta property="og:title" content="<?= $title ?>" />
 			<meta property="og:type" content="website" />
 			<meta property="og:url" content="<?= $baseUrl ?>/" />
-			<!-- <meta property="og:image" content="<?= $baseUrl ?>/images/opengraph.png" /> -->
+			<meta property="og:image" content="<?= $baseUrl ?>/opengraph.png" />
 			<meta property="og:description" content="<?= $description ?>" />
 			<meta property="og:locale" content="en_US" />
 			
@@ -51,10 +51,10 @@
 			<meta name="twitter:creator" content="@dmcblue">
 			<meta name="twitter:title" content="dmcblue">
 			<meta name="twitter:description" content="<?= $description ?>">
-			<!-- <meta name="twitter:image" content="<?= $baseUrl ?>/images/opengraph.png"> -->
+			<meta name="twitter:image" content="<?= $baseUrl ?>/opengraph.png">
 			<!-- END TwitterCard -->
 			<!-- Json LD -->
-			<script type='application/ld+json'>{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebSite","@id":"<?= json_encode($baseUrl) ?>","url":"<?= json_encode($baseUrl) ?>","name":"dmcblue","publisher":{"@id":"<?= json_encode($baseUrl) ?>\/about"}},{"@type":"ImageObject","@id":"<?= json_encode($baseUrl) ?>\/images\/opengraph.png","url":"<?= json_encode($baseUrl) ?>\/images\/opengraph.png","width":1273,"height":775},{"@type":"WebPage","@id":"<?= json_encode($baseUrl) ?>\/","url":"<?= json_encode($baseUrl) ?>\/","inLanguage":"en-US","name":"dmcblue","isPartOf":{"@id":"<?= json_encode($baseUrl) ?>"},"primaryImageOfPage":{"@id":"<?= json_encode($baseUrl) ?>\/images\/opengraph.png"},"datePublished":null,"dateModified":null},{"@type":"Article","@id":"<?= json_encode($baseUrl) ?>\/","isPartOf":{"@id":"<?= json_encode($baseUrl) ?>\/"},"author":{"@id":"<?= json_encode($baseUrl) ?>\/about"},"headline":"dmcblue","datePublished":null,"dateModified":null,"commentCount":0,"mainEntityOfPage":{"@id":"<?= json_encode($baseUrl) ?>\/"},"publisher":{"@id":"<?= json_encode($baseUrl) ?>\/about"},"image":{"@id":"<?= json_encode($baseUrl) ?>\/images\/opengraph.png"},"keywords":"","articleSection":""},{"@type":["Person"],"@id":"<?= json_encode($baseUrl) ?>\/about","name":"dmcblue","image":{"@type":"ImageObject","@id":"\/images\/opengraph.png","url":"\/images\/opengraph.png","caption":"dmcblue"},"sameAs":[]}]}</script>
+			<script type='application/ld+json'>{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebSite","@id":"<?= json_encode($baseUrl) ?>","url":"<?= json_encode($baseUrl) ?>","name":"dmcblue","publisher":{"@id":"<?= json_encode($baseUrl) ?>\/about"}},{"@type":"ImageObject","@id":"<?= json_encode($baseUrl) ?>\/opengraph.png","url":"<?= json_encode($baseUrl) ?>\/opengraph.png","width":1273,"height":775},{"@type":"WebPage","@id":"<?= json_encode($baseUrl) ?>\/","url":"<?= json_encode($baseUrl) ?>\/","inLanguage":"en-US","name":"dmcblue","isPartOf":{"@id":"<?= json_encode($baseUrl) ?>"},"primaryImageOfPage":{"@id":"<?= json_encode($baseUrl) ?>\/opengraph.png"},"datePublished":null,"dateModified":null},{"@type":"Article","@id":"<?= json_encode($baseUrl) ?>\/","isPartOf":{"@id":"<?= json_encode($baseUrl) ?>\/"},"author":{"@id":"<?= json_encode($baseUrl) ?>\/about"},"headline":"dmcblue","datePublished":null,"dateModified":null,"commentCount":0,"mainEntityOfPage":{"@id":"<?= json_encode($baseUrl) ?>\/"},"publisher":{"@id":"<?= json_encode($baseUrl) ?>\/about"},"image":{"@id":"<?= json_encode($baseUrl) ?>\/opengraph.png"},"keywords":"","articleSection":""},{"@type":["Person"],"@id":"<?= json_encode($baseUrl) ?>\/about","name":"dmcblue","image":{"@type":"ImageObject","@id":"\/opengraph.png","url":"\/opengraph.png","caption":"dmcblue"},"sameAs":[]}]}</script>
 			<!-- END Json LD -->
 		<!-- END Metadata -->
 		<style>
