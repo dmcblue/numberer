@@ -62,22 +62,40 @@
 	</head>
 	<body onload="start()" onkeyup="UI.onKeyUp(event)">
 		<h1>Learn Numbers</h1>
-		From: <select id="source" onchange="UI.setLanguage()">
-			<option value="ar">Arabic</option>
-			<option value="bn">Bengali</option>
-			<option value="fa">Farsi</option>
-			<option value="ur">Urdu</option>
-			<option value="en">English</option>
-		</select>
-		To: <select id="target" onchange="UI.setLanguage()">
-			<option value="ar">Arabic</option>
-			<option value="bn">Bengali</option>
-			<option value="en">English</option>
-			<option value="fa">Farsi</option>
-			<option value="ur">Urdu</option>
-		</select>
-		<br/>
-		<button id="flip" onclick="UI.flip()">Switch 🔄</button>
+		<div>
+			<label>Mode: <select id="mode" onchange="UI.setMode()">
+				<option value="match">Matching</option>
+				<option value="math">Math</option>
+			</select></label>
+		</div>
+		<div class="match">
+			<label>From: <select id="source" onchange="UI.setLanguage()">
+				<option value="ar">Arabic</option>
+				<option value="bn">Bengali</option>
+				<option value="fa">Farsi</option>
+				<option value="ur">Urdu</option>
+				<option value="en">English</option>
+			</select></label>
+			<label>To: <select id="target" onchange="UI.setLanguage()">
+				<option value="ar">Arabic</option>
+				<option value="bn">Bengali</option>
+				<option value="en">English</option>
+				<option value="fa">Farsi</option>
+				<option value="ur">Urdu</option>
+			</select></label>
+		</div>
+		<div class="math">
+			<label>Language: <select id="lang-math" onchange="UI.setLanguage()">
+				<option value="ar">Arabic</option>
+				<option value="bn">Bengali</option>
+				<option value="fa">Farsi</option>
+				<option value="ur">Urdu</option>
+				<option value="en">English</option>
+			</select></label>
+		</div>
+		<div class="match">
+			<button id="flip" onclick="UI.flip()">Switch 🔄</button>
+		</div>
 		<div id="disp"></div>
 		<div id="answer"></div>
 		<table id="numpad">
@@ -120,7 +138,9 @@
 					<td>
 						<button id="b0" onclick="UI.test(0)"></button>
 					</td>
-					<td></td>
+					<td>
+						<button class="math" onclick="UI.backspace()">&lt;</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
