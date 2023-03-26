@@ -58,48 +58,161 @@
 			<!-- END Json LD -->
 		<!-- END Metadata -->
 		<style>
+			body {
+				background: rgba(150, 150, 255, 1);
+				text-align: center;
+			}
 			#disp {
+				margin-top: 1rem;
+			}
+			#disp, #answer {
+				height: 4rem;
+			}
+			#disp .step, #answer .step {
+				margin-right: 0.5rem;
+			}
+			#disp[lang=en], #answer[lang=en] {
+				font-size: 300%;
+			}
+			#disp[lang=ar], #answer[lang=ar] {
 				font-size: 400%;
+			}
+			#disp[lang=fa], #answer[lang=fa] {
+				font-size: 400%;
+			}
+			#disp[lang=ur], #answer[lang=ur] {
+				font-size: 400%;
+			}
+			#answer {
+				margin-bottom: 1rem;
+			}
+			#answer .step {
+				border-bottom: 1px solid black;
+			}
+			.step {
+				display: inline-block;
+				width: 2.5rem;
+				text-align: center;
+			}
+			.step.correct {
+				background: rgba(10, 200, 10, 1);
+			}
+			.step.incorrect {
+				background: rgba(200, 10, 10, 1);
+			}
+			select, table button {
+				border: none;
+				background: rgba(10, 10, 200, 0.5);
+			}
+			select {
+				margin-right: 1em;
+			}
+			table {
+				margin: 0 auto;
+			}
+			table button {
+				width: 2.5rem;
+			}
+			table[lang=en] button {
+				font-size: 200%;
+			}
+			table[lang=ar] button {
+				font-size: 300%;
+			}
+			table[lang=fa] button {
+				font-size: 300%;
+			}
+			table[lang=ur] button {
+				font-size: 300%;
 			}
 		</style>
 		<script src="numberer.js" async="" defer="" crossorigin="anonymous"></script>
 	</head>
 	<body onload="start()">
 		<h1>Learn Numbers</h1>
-		<select id="lang" onchange="setLanguage()">
+		From: <select id="source" onchange="setLanguage()">
+			<option value="ar">Arabic</option>
+			<option value="fa">Farsi</option>
+			<option value="ur">Urdu</option>
+			<option value="en">English</option>
+		</select>
+		To: <select id="target" onchange="setLanguage()">
+			<option value="en">English</option>
 			<option value="ar">Arabic</option>
 			<option value="fa">Farsi</option>
 			<option value="ur">Urdu</option>
 		</select>
 		<div id="disp"></div>
-		<button id="b0" onclick="test(0)"></button>
-		<button id="b1" onclick="test(1)"></button>
-		<button id="b2" onclick="test(2)"></button>
-		<button id="b3" onclick="test(3)"></button>
-		<button id="b4" onclick="test(4)"></button>
-		<button id="b5" onclick="test(5)"></button>
-		<button id="b6" onclick="test(6)"></button>
-		<button id="b7" onclick="test(7)"></button>
-		<button id="b8" onclick="test(8)"></button>
-		<button id="b9" onclick="test(9)"></button>
+		<div id="answer"></div>
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<button id="b7" onclick="test(7)"></button>
+					</td>
+					<td>
+						<button id="b8" onclick="test(8)"></button>
+					</td>
+					<td>
+						<button id="b9" onclick="test(9)"></button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button id="b4" onclick="test(4)"></button>
+					</td>
+					<td>
+						<button id="b5" onclick="test(5)"></button>
+					</td>
+					<td>
+						<button id="b6" onclick="test(6)"></button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button id="b1" onclick="test(1)"></button>
+					</td>
+					<td>
+						<button id="b2" onclick="test(2)"></button>
+					</td>
+					<td>
+						<button id="b3" onclick="test(3)"></button>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button id="b0" onclick="test(0)"></button>
+					</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
 		<script>
 			// add mode to reverse study type
-			let lang = 'ar';
+			let source = 'ar';
+			let target = 'en';
 			let current = [0];
 			let testIndex = 0;
 			function start() {
+				document.getElementById('source').value = source;
+				document.getElementById('target').value = target;
 				setLanguage();
 				fillButtons();
 				next();
 			}
 
 			function setLanguage() {
-				lang = document.getElementById('lang').value;
+				source = document.getElementById('source').value;
+				target = document.getElementById('target').value;
+				fillButtons();
 				next();
 			}
 
-			function getDigitsInLanguage(digits) {
-				if (lang === 'ar') {
+			function getDigitsInLanguage(lang, digits) {
+				if (lang === 'en') {
+					return digits;
+				} else if (lang === 'ar') {
 					return digitsToArabic(digits)
 				}
 
@@ -109,30 +222,55 @@
 			function next() {
 				let numDigits = getRandomInteger(1, 5);
 				const disp = document.getElementById('disp');
-				disp.lang = lang;
+				disp.lang = source;
 				let temp = getDigits(numDigits);
 				while (temp.join('') === current.join('') || (temp[0] === 0 && temp.length > 1)) {
 					temp = getDigits(numDigits);
 				}
 				current = temp;
-				disp.textContent = getDigitsInLanguage(current).join('');
+				disp.innerHTML = '';
+				const lDigits = getDigitsInLanguage(source, current);
+				for (let i = 0; i < current.length; i++) {
+					const step = document.createElement('div');
+					step.className = 'step';
+					step.textContent = lDigits[i];
+					disp.appendChild(step);
+				}
 				testIndex = 0;
+
+				const answer = document.getElementById('answer');
+				answer.innerHTML = '';
+				answer.lang = target;
+				for (let i = 0; i < current.length; i++) {
+					const step = document.createElement('div');
+					step.className = 'step';
+					step.id = `s${i}`;
+					step.innerHTML = '&nbsp;';
+					answer.appendChild(step);
+				}
 			}
 
 			function fillButtons() {
 				for (let i = 0; i < 10; i++) {
-					document.getElementById(`b${i}`).textContent = +i;
+					const n = getDigitsInLanguage(target, [i])[0];
+					document.getElementById(`b${i}`).textContent = n;
 				}
 			}
 
 			function test(n) {
+				const step = document.getElementById(`s${testIndex}`);
+				step.textContent = getDigitsInLanguage(target, [n])[0];
 				if (n === current[testIndex]) {
+					step.className = 'step correct';
 					console.log('yes');
 					testIndex++;
 					if (testIndex === current.length) {
-						next();
+						setTimeout(function() {
+							next();
+						}, 500);
 					}
 				} else {
+					step.className = 'step incorrect';
 					console.log('no');
 				}
 			}
