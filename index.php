@@ -64,11 +64,9 @@
 				background: rgba(150, 150, 255, 1);
 				text-align: center;
 			}
-			#disp {
-				margin-top: 1rem;
-			}
 			#disp, #answer {
 				height: 4rem;
+				margin-top: 1rem;
 			}
 			#disp .step, #answer .step {
 				margin-right: 0.5rem;
