@@ -65,7 +65,7 @@
 				text-align: center;
 			}
 			#disp, #answer {
-				height: 4rem;
+				min-height: 4rem;
 				margin-top: 1rem;
 			}
 			#disp .step, #answer .step {
