@@ -112,6 +112,8 @@
 			}
 			table button {
 				width: 2.5rem;
+				padding: 0.5rem;
+				font-size: 150%;
 			}
 			table[lang=en] button {
 				font-size: 200%;
