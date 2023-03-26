@@ -35,7 +35,7 @@ body .math {
 }
 body.match .match,
 body.math .math {
-	display: unset;
+	display: block;
 }
 #disp hr {
 	width: 3em;
