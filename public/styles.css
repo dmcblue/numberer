@@ -10,7 +10,7 @@ body {
 #disp .step, #answer .step {
 	margin-right: 0.5rem;
 }
-#disp, #answer[lang=en] {
+#disp, #answer {
 	font-size: 400%;
 }
 #disp[lang=en], #answer[lang=en] {
