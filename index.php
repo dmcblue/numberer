@@ -245,7 +245,7 @@
 				if (keyCode > 47 && keyCode < 58) {
 					test(keyCode - 48);
 				} else if (keyCode > 95 && keyCode < 106) {
-					test(keyCode - 95);
+					test(keyCode - 96);
 				}
 			}
 
