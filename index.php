@@ -24,9 +24,9 @@
 		<!-- <link href="<?= $baseUrl ?>/style.css" rel="stylesheet" type="text/css">
 		<link href="<?= $baseUrl ?>/home.css" rel="stylesheet" type="text/css"> -->
 		<!-- Fonts -->
-		<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet"> -->
+		<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300&display=swap" rel="stylesheet">
 		<!-- END Fonts -->
 
 		
@@ -60,6 +60,7 @@
 		<!-- END Metadata -->
 		<style>
 			body {
+				font-family: 'Vazirmatn', sans-serif;
 				background: rgba(150, 150, 255, 1);
 				text-align: center;
 			}
