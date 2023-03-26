@@ -1,0 +1,22 @@
+{
+    "name": "dmcblue/numberer",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dmcblue\\Numberer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "dmcblue",
+            "email": "dmcblue@gmail.com"
+        }
+    ],
+    "require": {
+		"vlucas/phpdotenv": "^5.3"
+    },
+    "scripts": {
+        "serve": ["Composer\\Config::disableProcessTimeout", "php -S 0.0.0.0:8040 -t public"]
+    }
+}
