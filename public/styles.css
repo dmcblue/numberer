@@ -1,0 +1,68 @@
+body {
+	font-family: 'Vazirmatn', sans-serif;
+	background: rgba(150, 150, 255, 1);
+	text-align: center;
+}
+#disp, #answer {
+	min-height: 4rem;
+	margin-top: 1rem;
+}
+#disp .step, #answer .step {
+	margin-right: 0.5rem;
+}
+#disp, #answer[lang=en] {
+	font-size: 400%;
+}
+#disp[lang=en], #answer[lang=en] {
+	font-size: 300%;
+}
+#answer {
+	margin-bottom: 1rem;
+}
+#answer .step {
+	border-bottom: 1px solid black;
+}
+.step {
+	display: inline-block;
+	width: 2.5rem;
+	text-align: center;
+}
+.step.correct {
+	background: rgba(10, 200, 10, 1);
+}
+.step.incorrect {
+	background: rgba(200, 10, 10, 1);
+}
+select, button {
+	border: none;
+	background: rgba(10, 10, 200, 0.5);
+}
+select {
+	margin-right: 1em;
+}
+table {
+	margin: 0 auto;
+}
+table button {
+	width: 2.5rem;
+	padding: 0.5rem;
+	font-size: 150%;
+}
+table button {
+	font-size: 250%;
+}
+table[lang=en] button {
+	font-size: 250%;
+}
+table[lang=fa] button {
+	font-size: 250%;
+}
+table[lang=bn] button {
+	font-size: 250%;
+}
+#flip {
+	margin-top: 1em;
+}
+p {
+	font-size: 80%;
+}
