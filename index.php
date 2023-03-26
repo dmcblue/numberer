@@ -3,8 +3,8 @@
 	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 	$dotenv->load();
 	$baseUrl = $_ENV['NUMBERER_URL'];
-	$title = 'Numberer';
-	$description = 'Learn numbers';
+	$title = 'Learn Numbers';
+	$description = 'Practice various number systems';
 	ob_start();
 ?><!DOCTYPE html>
 <html lang="en-US">
@@ -101,7 +101,7 @@
 			.step.incorrect {
 				background: rgba(200, 10, 10, 1);
 			}
-			select, table button {
+			select, button {
 				border: none;
 				background: rgba(10, 10, 200, 0.5);
 			}
@@ -126,10 +126,16 @@
 			table[lang=ur] button {
 				font-size: 300%;
 			}
+			#flip {
+				margin-top: 1em;
+			}
+			p {
+				font-size: 50%;
+			}
 		</style>
 		<script src="numberer.js" async="" defer="" crossorigin="anonymous"></script>
 	</head>
-	<body onload="start()">
+	<body onload="start()" onkeyup="onKeyUp(event)">
 		<h1>Learn Numbers</h1>
 		From: <select id="source" onchange="setLanguage()">
 			<option value="ar">Arabic</option>
@@ -143,6 +149,8 @@
 			<option value="fa">Farsi</option>
 			<option value="ur">Urdu</option>
 		</select>
+		<br/>
+		<button id="flip" onclick="flip()">Switch</button>
 		<div id="disp"></div>
 		<div id="answer"></div>
 		<table>
@@ -189,13 +197,24 @@
 				</tr>
 			</tbody>
 		</table>
+		<p>
+			Click or type to enter numbers.
+		</p>
 		<script>
-			// add mode to reverse study type
+			const possible = ['ar', 'fa', 'ur', 'en'];
 			let source = 'ar';
 			let target = 'en';
 			let current = [0];
 			let testIndex = 0;
 			function start() {
+				const queryString = window.location.search;
+				const urlParams = new URLSearchParams(queryString);
+				if (possible.includes(urlParams.get('source'))) {
+					source = urlParams.get('source');
+				}
+				if (possible.includes(urlParams.get('target'))) {
+					target = urlParams.get('target');
+				}
 				document.getElementById('source').value = source;
 				document.getElementById('target').value = target;
 				setLanguage();
@@ -206,8 +225,27 @@
 			function setLanguage() {
 				source = document.getElementById('source').value;
 				target = document.getElementById('target').value;
+				const queryString = window.location.search;
+				const urlParams = new URLSearchParams(queryString);
+				urlParams.set('source', source);
+				urlParams.set('target', target);
+				var newRelativePathQuery = window.location.pathname + '?' + urlParams.toString();
+    			history.pushState(null, '', newRelativePathQuery);
 				fillButtons();
 				next();
+			}
+
+			function flip() {
+				document.getElementById('source').value = target;
+				document.getElementById('target').value = source;
+				setLanguage();
+			}
+
+			function onKeyUp(event) {
+				const keyCode = parseInt(event.keyCode);
+				if (keyCode > 47 && keyCode < 58) {
+					test(keyCode - 48);
+				}
 			}
 
 			function getDigitsInLanguage(lang, digits) {
@@ -263,7 +301,6 @@
 				step.textContent = getDigitsInLanguage(target, [n])[0];
 				if (n === current[testIndex]) {
 					step.className = 'step correct';
-					console.log('yes');
 					testIndex++;
 					if (testIndex === current.length) {
 						setTimeout(function() {
@@ -272,7 +309,6 @@
 					}
 				} else {
 					step.className = 'step incorrect';
-					console.log('no');
 				}
 			}
 		</script>
